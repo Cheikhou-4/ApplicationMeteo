@@ -19,15 +19,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./app-meteo
 
       - name: Build Angular app
         run: npm run build -- --configuration production --base-href "/ApplicationMeteo/"
-        working-directory: ./app-meteo
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: app-meteo/dist/app-meteo
+          folder: dist/app-meteo
           clean: true
