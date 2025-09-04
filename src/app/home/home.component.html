@@ -1,0 +1,92 @@
+<div class="meteo-bg position-relative min-vh-100">
+	<div class="container-fluid py-5 position-relative" style="z-index:1;">
+							<div class="row mb-4">
+								<div class="col-12">
+									<div class="welcome-animate meteo-welcome text-center">
+										<h2 class="mb-2">
+											<i class="bi bi-cloud-sun text-primary me-2"></i>
+											Bienvenue sur <span class="fw-bold">MeteoSN</span>
+										</h2>
+										<p class="mb-0 fs-5">Consultez la météo en temps réel pour n'importe quelle ville dans le monde.<br>Entrez le nom d'une ville et lancez la recherche !</p>
+									</div>
+								</div>
+							</div>
+					<div class="row justify-content-center">
+						<div class="col-12 col-md-10 col-lg-8 mx-auto">
+							<form (ngSubmit)="onSubmit()" class="meteo-form mb-3">
+								<div class="mb-3 position-relative">
+									<label for="city" class="form-label visually-hidden">Ville</label>
+									<span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-primary">
+										<i class="bi bi-search"></i>
+									</span>
+									<input type="text" id="city" class="form-control ps-5" placeholder="Entrez le nom de la ville" [(ngModel)]="city" name="city" required style="box-shadow: 0 0 0 0.2rem #90caf9;">
+								</div>
+								<div class="d-grid gap-2">
+									<div class="d-flex gap-2">
+										<button type="submit" class="btn btn-primary flex-fill">
+											<i class="bi bi-search"></i> Rechercher
+										</button>
+										<button type="button" class="btn btn-outline-secondary flex-fill" (click)="getMyPosition()">
+											<i class="bi bi-geo-alt"></i> Ma position
+										</button>
+									</div>
+								</div>
+							</form>
+							<div *ngIf="loading" class="mt-4 text-center">
+								<div class="d-flex justify-content-center align-items-center flex-column">
+									<div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+										<span class="visually-hidden">Chargement...</span>
+									</div>
+									<span class="mt-2 text-primary fw-bold">Recherche météo...</span>
+								</div>
+							</div>
+							<div *ngIf="error" class="mt-4 alert alert-danger text-center" role="alert" aria-live="assertive">
+								<i class="bi bi-exclamation-triangle-fill fs-4 me-2"></i>
+								<span class="fw-bold">Erreur :</span> {{ error }}
+							</div>
+							<div *ngIf="weather" class="mt-4 d-flex flex-column align-items-center">
+								  <div class="weather-animate glass-card meteo-card text-center position-relative">
+												<h3 class="card-title mb-2 d-flex align-items-center justify-content-center gap-2">
+													<i class="bi bi-geo-alt-fill text-primary"></i>
+													<span class="fw-bold">{{ weather.name }}, {{ weather.sys.country }}</span>
+													<button class="btn btn-sm btn-outline-warning ms-2" (click)="toggleFavori()" [attr.aria-label]="isFavori() ? 'Retirer des favoris' : 'Ajouter aux favoris'">
+														<i class="bi" [ngClass]="isFavori() ? 'bi-star-fill text-warning' : 'bi-star'" ></i>
+													</button>
+												</h3>
+									<div class="mb-3">
+										<img [src]="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@4x.png'" alt="icon" style="width:100px;">
+									</div>
+									<h4 class="mb-2 display-5 fw-bold text-dark">
+										<i class="bi bi-thermometer-half text-danger"></i>
+										{{ weather.main.temp }}°C
+									</h4>
+									<p class="mb-1 fs-5">
+										<i class="bi bi-cloud text-info"></i>
+										<span class="text-capitalize">{{ weather.weather[0].description }}</span>
+									</p>
+									<p class="mb-1">
+										<i class="bi bi-wind text-secondary"></i>
+										Vent : {{ weather.wind.speed }} m/s
+									</p>
+									<p class="mb-0">
+										<i class="bi bi-droplet text-primary"></i>
+										Humidité : {{ weather.main.humidity }}%
+									</p>
+								</div>
+								<!-- Prévisions à 5 jours -->
+								<div class="mt-4 w-100">
+									<h5 class="fw-bold mb-3 text-center"><i class="bi bi-calendar-week me-2"></i>Prévisions à 5 jours</h5>
+									<div class="d-flex flex-row flex-nowrap overflow-auto meteo-forecast-row">
+										<div *ngFor="let forecast of forecasts" class="forecast-card meteo-forecast text-center">
+											<div class="fw-bold">{{ forecast.date | date:'EEE d/MM' }}</div>
+											<img [src]="'https://openweathermap.org/img/wn/' + forecast.icon + '@2x.png'" alt="icon" style="width:48px;">
+											<div class="fw-bold fs-5">{{ forecast.temp }}°C</div>
+											<div class="text-capitalize small">{{ forecast.description }}</div>
+										</div>
+									</div>
+						</div>
+				</div>
+			</div>
+	</div>
+	</div>
+</div>

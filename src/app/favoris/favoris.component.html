@@ -1,0 +1,49 @@
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-10 col-lg-8">
+			<div class="card shadow glass-card text-center mb-4">
+				<div class="card-body">
+					<h2 class="mb-3"><i class="bi bi-star text-warning me-2"></i>Mes villes favorites</h2>
+					<p class="text-muted">Retrouvez ici la météo de vos villes préférées.</p>
+				</div>
+			</div>
+			<div *ngIf="loading" class="text-center my-4">
+				<div class="spinner-border text-primary" role="status">
+					<span class="visually-hidden">Chargement...</span>
+				</div>
+				<div class="mt-2">Chargement des favoris...</div>
+			</div>
+			<div *ngIf="!loading && favoris.length === 0" class="alert alert-info text-center">
+				<i class="bi bi-info-circle me-2"></i>
+				Vous n'avez pas encore de favoris. Ajoutez-en depuis la page météo !
+			</div>
+			<div *ngIf="!loading && favoris.length > 0">
+				<div class="row g-3">
+					<div class="col-12 col-md-6 col-lg-4" *ngFor="let meteo of meteoList">
+						<div class="card shadow glass-card text-center">
+							<div class="card-body">
+												<h5 class="card-title mb-2 d-flex align-items-center justify-content-center gap-2">
+													<i class="bi bi-geo-alt-fill text-primary"></i>
+													<span class="fw-bold">{{ meteo.name }}, {{ meteo.sys.country }}</span>
+													<button class="btn btn-sm btn-outline-danger ms-2" (click)="removeFavori(meteo.name)">
+														<i class="bi bi-x-circle"></i>
+													</button>
+												</h5>
+								<div class="mb-2">
+									<img [src]="'https://openweathermap.org/img/wn/' + meteo.weather[0].icon + '@2x.png'" alt="icon" style="width:60px;">
+								</div>
+								<div class="fw-bold fs-4 mb-1">{{ meteo.main.temp }}°C</div>
+								<div class="text-capitalize mb-1">{{ meteo.weather[0].description }}</div>
+								<div class="small">
+									<i class="bi bi-wind text-secondary"></i> {{ meteo.wind.speed }} m/s
+									&nbsp;|&nbsp;
+									<i class="bi bi-droplet text-primary"></i> {{ meteo.main.humidity }}%
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
