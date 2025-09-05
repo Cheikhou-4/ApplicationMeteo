@@ -122,9 +122,44 @@
 	margin: 0 auto 1.5rem auto;
 	border-radius: 1.5rem;
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-	background: rgba(255,255,255,0.75);
+	background: #fff;
 	padding: 2rem 1.2rem 1.5rem 1.2rem;
-	border: 1px solid rgba(255,255,255,0.18);
+	border: 2px solid #1976d2;
+}
+
+.meteo-card .text-secondary, .meteo-card .text-primary, .meteo-card .text-info {
+	opacity: 1;
+	color: #1a237e !important;
+}
+.meteo-card .text-primary {
+	color: #1976d2 !important;
+	font-weight: 600;
+}
+.meteo-card .text-info {
+	color: #0288d1 !important;
+	font-weight: 600;
+}
+.meteo-card .text-secondary {
+	color: #37474f !important;
+	font-weight: 600;
+}
+.meteo-card .text-danger {
+	color: #b71c1c !important;
+	font-weight: 700;
+}
+.meteo-card .fw-bold {
+	font-weight: 700 !important;
+	color: #222;
+}
+.meteo-card .fs-5 {
+	font-size: 1.25rem !important;
+	color: #222;
+}
+.meteo-card .mb-1 {
+	margin-bottom: 0.5rem !important;
+	color: #1a237e !important;
+	font-weight: 600;
+	text-shadow: 0 1px 2px #fff, 0 0px 1px #90caf9;
 }
 
 /* Bande de prévisions compacte et horizontale */
