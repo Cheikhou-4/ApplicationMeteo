@@ -1,0 +1,93 @@
+{
+  "configVersion": 1,
+  "timestamp": 1757043054443,
+  "index": "/ApplicationMeteo/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/ApplicationMeteo/favicon.ico",
+        "/ApplicationMeteo/index.html",
+        "/ApplicationMeteo/main.6cae5b88ce71d09c.js",
+        "/ApplicationMeteo/manifest.webmanifest",
+        "/ApplicationMeteo/polyfills.2e47709980cdb0d1.js",
+        "/ApplicationMeteo/runtime.a11b417684fa45e7.js",
+        "/ApplicationMeteo/scripts.425520de70bbab43.js",
+        "/ApplicationMeteo/styles.0f7002497d5f4a36.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/ApplicationMeteo/assets/icons/icon-128x128.png",
+        "/ApplicationMeteo/assets/icons/icon-144x144.png",
+        "/ApplicationMeteo/assets/icons/icon-152x152.png",
+        "/ApplicationMeteo/assets/icons/icon-192x192.png",
+        "/ApplicationMeteo/assets/icons/icon-384x384.png",
+        "/ApplicationMeteo/assets/icons/icon-512x512.png",
+        "/ApplicationMeteo/assets/icons/icon-72x72.png",
+        "/ApplicationMeteo/assets/icons/icon-96x96.png",
+        "/ApplicationMeteo/bootstrap-icons.154365acf3010d96.woff2",
+        "/ApplicationMeteo/bootstrap-icons.ac1a99b3d05d8232.woff",
+        "/ApplicationMeteo/layers-2x.9859cd1231006a4a.png",
+        "/ApplicationMeteo/layers.ef6db8722c2c3f9a.png",
+        "/ApplicationMeteo/marker-icon.d577052aa271e13f.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/ApplicationMeteo/assets/icons/icon-128x128.png": "b1f06c7d714abb4a0cc4d1f7c954feb26826e4c4",
+    "/ApplicationMeteo/assets/icons/icon-144x144.png": "96a0d629765c1bc85d9263c6bc83094ca776d267",
+    "/ApplicationMeteo/assets/icons/icon-152x152.png": "b1fbbee3902eb96a7658e3bb006f31f78ca5a44c",
+    "/ApplicationMeteo/assets/icons/icon-192x192.png": "e4211163bf0911688fbfb80278d8ff4d2f77691d",
+    "/ApplicationMeteo/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/ApplicationMeteo/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/ApplicationMeteo/assets/icons/icon-72x72.png": "279825a1ac4377032ae996a1832c641e33ccf1b6",
+    "/ApplicationMeteo/assets/icons/icon-96x96.png": "592885efcbfee27e5e20be4fa3043589390d2740",
+    "/ApplicationMeteo/bootstrap-icons.154365acf3010d96.woff2": "b441fcff939e24fa0906a37b7788788b9fddbb68",
+    "/ApplicationMeteo/bootstrap-icons.ac1a99b3d05d8232.woff": "762010c79b4a05e1131fc8fb3b1aeff324d8033f",
+    "/ApplicationMeteo/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/ApplicationMeteo/index.html": "0ec4aa9750461207e9e21cea9b201e9051c3858c",
+    "/ApplicationMeteo/layers-2x.9859cd1231006a4a.png": "152a162333e46d24f9d89f566312fc0c64011dee",
+    "/ApplicationMeteo/layers.ef6db8722c2c3f9a.png": "c9e7528e491a39232ba24a2706c6c739d6fb0f06",
+    "/ApplicationMeteo/main.6cae5b88ce71d09c.js": "209ae02a4c22ad490d6ce042de88a24328a33488",
+    "/ApplicationMeteo/manifest.webmanifest": "0b5db547df3e97e98a87a6733de6a569ceb63b80",
+    "/ApplicationMeteo/marker-icon.d577052aa271e13f.png": "60a90bcbb2b42b7ddb4556db94eb7c1084b0e5da",
+    "/ApplicationMeteo/polyfills.2e47709980cdb0d1.js": "2f6e336cd37674057ec5cf3e688b7b3a97eee28d",
+    "/ApplicationMeteo/runtime.a11b417684fa45e7.js": "2244c86f8eda14481e94f12844f93d9f77a97dc0",
+    "/ApplicationMeteo/scripts.425520de70bbab43.js": "7211c1b6834a647c20c392e955cec24fcf063731",
+    "/ApplicationMeteo/styles.0f7002497d5f4a36.css": "ff8c6225590d3433c2565bc728c3fd628999239b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
