@@ -1,3 +1,35 @@
+/* Styles pour les cartes de prévisions météo */
+.meteo-forecast-row .forecast-card {
+	background: #fff;
+	border-radius: 1rem;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+	border: 1px solid #e0e0e0;
+	min-width: 120px;
+	margin-right: 1rem;
+	padding: 1rem 0.5rem;
+	color: #222;
+	transition: box-shadow 0.2s;
+}
+.meteo-forecast-row .forecast-card:last-child {
+	margin-right: 0;
+}
+.meteo-forecast-row .forecast-card:hover {
+	box-shadow: 0 4px 16px rgba(25,118,210,0.15);
+}
+/* Fonds météo dynamiques */
+.meteo-bg-default {
+	background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
+}
+.meteo-bg-sun {
+	background: linear-gradient(135deg, #ffe259 0%, #ffa751 100%);
+}
+.meteo-bg-rain {
+	background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+.meteo-bg-night {
+	background: linear-gradient(135deg, #232526 0%, #414345 100%);
+	color: #fff;
+}
 /* Fond dégradé immersif */
 .meteo-bg {
 	min-height: 100vh;

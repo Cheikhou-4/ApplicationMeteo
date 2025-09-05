@@ -1,1 +1,22 @@
+/* Forcer le style Leaflet sur la carte météo */
+#meteo-map, .leaflet-container {
+	min-height: 350px !important;
+	height: 350px !important;
+	width: 100% !important;
+	z-index: 1;
+}
+@import "leaflet/dist/leaflet.css";
+/* Forcer la netteté du canvas Chart.js sur Chrome et écrans haute densité */
+canvas {
+	image-rendering: auto !important;
+	-webkit-font-smoothing: antialiased !important;
+	-webkit-backface-visibility: hidden !important;
+	backface-visibility: hidden !important;
+}
+/* Améliore la netteté des graphiques Chart.js sur écrans haute densité */
+canvas {
+	image-rendering: pixelated;
+	/* Pour Chrome/Edge/Opera, améliore la netteté sur certains écrans */
+	image-rendering: crisp-edges;
+}
 /* You can add global styles to this file, and also import other style files */

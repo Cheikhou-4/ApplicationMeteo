@@ -1,4 +1,4 @@
-<div class="meteo-bg position-relative min-vh-100">
+<div [ngClass]="getBackgroundClass()" class="position-relative min-vh-100">
 	<div class="container-fluid py-5 position-relative" style="z-index:1;">
 							<div class="row mb-4">
 								<div class="col-12">
@@ -8,7 +8,34 @@
 											Bienvenue sur <span class="fw-bold">MeteoSN</span>
 										</h2>
 										<p class="mb-0 fs-5">Consultez la météo en temps réel pour n'importe quelle ville dans le monde.<br>Entrez le nom d'une ville et lancez la recherche !</p>
-									</div>
+												   </div>
+												   <!-- Bouton pour afficher/masquer les conseils -->
+												   <div class="mt-3 w-100 text-center">
+													   <button class="btn btn-primary btn-sm mb-2" (click)="showConseils = !showConseils">
+														   <i class="bi bi-lightbulb me-1"></i>
+														   {{ showConseils ? 'Masquer les conseils' : 'Voir les conseils & infos locales' }}
+													   </button>
+													   <div *ngIf="showConseils">
+														   <div class="alert alert-warning p-2 mb-2 small d-flex align-items-start" style="border-radius:0.75rem;">
+															   <i class="bi bi-sun me-2"></i>
+															   <div>
+																   <b>Conseils pratiques&nbsp;:</b><br>
+																   <ul class="mb-1 ms-3">
+																	   <li *ngFor="let conseil of conseilsPratiques">{{ conseil }}</li>
+																   </ul>
+															   </div>
+														   </div>
+														   <div class="alert alert-success p-2 small d-flex align-items-start" style="border-radius:0.75rem;">
+															   <i class="bi bi-tree me-2"></i>
+															   <div>
+																   <b>Données climatiques locales&nbsp;:</b><br>
+																   <ul class="mb-1 ms-3">
+																	   <li *ngFor="let info of donneesClimatiques">{{ info }}</li>
+																   </ul>
+															   </div>
+														   </div>
+													   </div>
+												   </div>
 								</div>
 							</div>
 					<div class="row justify-content-center">
@@ -19,7 +46,12 @@
 									<span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-primary">
 										<i class="bi bi-search"></i>
 									</span>
-									<input type="text" id="city" class="form-control ps-5" placeholder="Entrez le nom de la ville" [(ngModel)]="city" name="city" required style="box-shadow: 0 0 0 0.2rem #90caf9;">
+									<input type="text" id="city" class="form-control ps-5" placeholder="Entrez le nom de la ville" [(ngModel)]="city" name="city" required style="box-shadow: 0 0 0 0.2rem #90caf9;" (input)="onCityInputEvent($event)">
+									<ul *ngIf="citySuggestions.length" class="list-group position-absolute w-100 shadow" style="z-index:10; top:100%; left:0;">
+										<li *ngFor="let suggestion of citySuggestions" class="list-group-item list-group-item-action" (click)="selectCitySuggestion(suggestion)" style="cursor:pointer;">
+											<i class="bi bi-geo-alt text-primary me-2"></i>{{ suggestion }}
+										</li>
+									</ul>
 								</div>
 								<div class="d-grid gap-2">
 									<div class="d-flex gap-2">
@@ -45,7 +77,7 @@
 								<span class="fw-bold">Erreur :</span> {{ error }}
 							</div>
 							<div *ngIf="weather" class="mt-4 d-flex flex-column align-items-center">
-								  <div class="weather-animate glass-card meteo-card text-center position-relative">
+								<div class="weather-animate glass-card meteo-card text-center position-relative">
 												<h3 class="card-title mb-2 d-flex align-items-center justify-content-center gap-2">
 													<i class="bi bi-geo-alt-fill text-primary"></i>
 													<span class="fw-bold">{{ weather.name }}, {{ weather.sys.country }}</span>
@@ -73,18 +105,72 @@
 										Humidité : {{ weather.main.humidity }}%
 									</p>
 								</div>
-								<!-- Prévisions à 5 jours -->
-								<div class="mt-4 w-100">
-									<h5 class="fw-bold mb-3 text-center"><i class="bi bi-calendar-week me-2"></i>Prévisions à 5 jours</h5>
-									<div class="d-flex flex-row flex-nowrap overflow-auto meteo-forecast-row">
-										<div *ngFor="let forecast of forecasts" class="forecast-card meteo-forecast text-center">
-											<div class="fw-bold">{{ forecast.date | date:'EEE d/MM' }}</div>
-											<img [src]="'https://openweathermap.org/img/wn/' + forecast.icon + '@2x.png'" alt="icon" style="width:48px;">
-											<div class="fw-bold fs-5">{{ forecast.temp }}°C</div>
-											<div class="text-capitalize small">{{ forecast.description }}</div>
+										<!-- Prévisions à 5 jours -->
+										<div class="mt-4 w-100">
+											<h5 class="fw-bold mb-3 text-center"><i class="bi bi-calendar-week me-2"></i>Prévisions à 5 jours</h5>
+											<div class="d-flex flex-row flex-nowrap overflow-auto meteo-forecast-row">
+												<div *ngFor="let forecast of forecasts" class="forecast-card meteo-forecast text-center">
+													<div class="fw-bold">{{ forecast.date | date:'EEE d/MM' }}</div>
+													<img [src]="'https://openweathermap.org/img/wn/' + forecast.icon + '@2x.png'" alt="icon" style="width:48px;">
+													<div class="fw-bold fs-5">{{ forecast.temp }}°C</div>
+													<div class="text-capitalize small">{{ forecast.description }}</div>
+												</div>
+											</div>
 										</div>
-									</div>
-						</div>
+										   <!-- Graphique météo -->
+										   <div *ngIf="forecasts.length > 0" class="mt-4 w-100 d-flex justify-content-center">
+											   <div class="bg-white shadow rounded-4 p-4" style="max-width:600px; width:100%;">
+												   <canvas baseChart
+													   [data]="tempChartData"
+													   [options]="tempChartOptions"
+													   [type]="'line'"
+													   width="600"
+													   height="350">
+												   </canvas>
+											   </div>
+										   </div>
+										   <!-- Boutons de partage social -->
+										   <div *ngIf="weather" class="mt-4 w-100 d-flex justify-content-center">
+											   <div class="bg-white shadow rounded-4 p-3 d-flex flex-column align-items-center" style="max-width:600px; width:100%;">
+												   <span class="fw-bold mb-2"><i class="bi bi-share-fill me-2"></i>Partager la météo</span>
+												   <div class="d-flex gap-3">
+													   <a [href]="whatsappShareUrl" target="_blank" rel="noopener" class="btn btn-success btn-sm rounded-circle" aria-label="Partager sur WhatsApp">
+														   <i class="bi bi-whatsapp fs-4"></i>
+													   </a>
+													   <a [href]="twitterShareUrl" target="_blank" rel="noopener" class="btn btn-info btn-sm rounded-circle" aria-label="Partager sur Twitter" style="color:white;">
+														   <i class="bi bi-twitter fs-4"></i>
+													   </a>
+													   <a [href]="facebookShareUrl" target="_blank" rel="noopener" class="btn btn-primary btn-sm rounded-circle" aria-label="Partager sur Facebook">
+														   <i class="bi bi-facebook fs-4"></i>
+													   </a>
+												   </div>
+											   </div>
+										   </div>
+
+										   <!-- Carte météo interactive -->
+										   <div *ngIf="weather" class="mt-4 w-100 d-flex justify-content-center">
+											   <div class="bg-white shadow rounded-4 p-3 d-flex flex-column align-items-center" style="max-width:700px; width:100%;">
+												   <span class="fw-bold mb-2"><i class="bi bi-map me-2"></i>Carte météo interactive (pluie)</span>
+												   <div id="meteo-map" style="height:350px; width:100%; border-radius:1rem; overflow:hidden; border:2px solid red; background: #eee; min-height: 350px;"></div>
+												   <!-- Légende de la carte -->
+												   <div class="mt-3 w-100">
+													   <div class="alert alert-info p-2 mb-0 small d-flex align-items-center" style="border-radius:0.75rem;">
+														   <i class="bi bi-info-circle me-2"></i>
+														   <span>
+															   <b>Légende&nbsp;:</b> <br>
+															   <span class="d-block ms-3">
+																   <span class="d-inline-block" style="width:18px; height:10px; background:#00f; opacity:0.5; border-radius:2px; margin-right:4px;"></span> Pluie faible &nbsp;
+																   <span class="d-inline-block" style="width:18px; height:10px; background:#0ff; opacity:0.5; border-radius:2px; margin-right:4px;"></span> Pluie modérée &nbsp;
+																   <span class="d-inline-block" style="width:18px; height:10px; background:#0f0; opacity:0.5; border-radius:2px; margin-right:4px;"></span> Pluie forte &nbsp;
+																   <span class="d-inline-block" style="width:18px; height:10px; background:#ff0; opacity:0.5; border-radius:2px; margin-right:4px;"></span> Pluie très forte &nbsp;
+																   <span class="d-inline-block" style="width:18px; height:10px; background:#f00; opacity:0.5; border-radius:2px; margin-right:4px;"></span> Pluie extrême
+															   </span>
+															   <span class="d-block ms-3 mt-1">Déplacez la carte ou zoomez pour explorer. Les couleurs indiquent l’intensité des précipitations en temps réel.</span>
+														   </span>
+													   </div>
+												   </div>
+											   </div>
+										   </div>
 				</div>
 			</div>
 	</div>
