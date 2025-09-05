@@ -46,6 +46,68 @@
 	margin-bottom: 1.5rem;
 }
 
+/* Conseils et infos locales améliorés */
+.meteo-conseils-infos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+.meteo-conseil-card, .meteo-info-card {
+	background: linear-gradient(135deg, #fffbe7 0%, #e3f0ff 100%);
+	border-radius: 1rem;
+	box-shadow: 0 4px 16px rgba(25,118,210,0.13);
+	padding: 1.2rem 1.4rem;
+	min-width: 220px;
+	max-width: 340px;
+	flex: 1 1 220px;
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	border: 2px solid #90caf9;
+	color: #222;
+	font-size: 1.08em;
+	font-weight: 500;
+}
+.meteo-conseil-card i {
+	color: #ffb300;
+	font-size: 2.1rem;
+	flex-shrink: 0;
+	filter: drop-shadow(0 2px 4px #ffe082);
+}
+.meteo-info-card i {
+	color: #43a047;
+	font-size: 2.1rem;
+	flex-shrink: 0;
+	filter: drop-shadow(0 2px 4px #b9f6ca);
+}
+.meteo-conseil-card ul, .meteo-info-card ul {
+	margin-bottom: 0;
+	padding-left: 1.2rem;
+	color: #222;
+	font-size: 1em;
+}
+.meteo-conseil-card b, .meteo-info-card b {
+	font-size: 1.13em;
+	color: #1565c0;
+	font-weight: 600;
+}
+.meteo-conseil-card li, .meteo-info-card li {
+	margin-bottom: 0.25rem;
+}
+@media (max-width: 600px) {
+	.meteo-conseils-infos {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.meteo-conseil-card, .meteo-info-card {
+		min-width: 0;
+		max-width: 100%;
+		padding: 0.8rem 0.7rem;
+	}
+}
+
 /* Formulaire sans encadré */
 .meteo-form {
 	background: none;
